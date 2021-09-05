@@ -9,11 +9,11 @@ The following diagrams show a high level view of the app, its modules and the pr
 
 ### Context Diaggram
 
-![Context Diagram](./VisualNodeEditor-ContextDiagram.jpg)
+![Context Diagram](./images/VisualNodeEditor-ContextDiagram.jpg)
 
 ### UI Diagrams
 
-![Main Page Diagram](./VisualNodeEditor-MainPage-Wireframe.jpg)
+![Main Page Diagram](./images/VisualNodeEditor-MainPage-Wireframe.jpg)
 
 
 ## Backend Folder Structure
