@@ -5,6 +5,7 @@ specifiers:
   '@vue/cli-plugin-eslint': ~4.5.0
   '@vue/cli-service': ~4.5.0
   '@vue/compiler-sfc': ^3.0.0
+  axios: ^0.21.4
   babel-eslint: ^10.1.0
   core-js: ^3.6.5
   eslint: ^6.7.2
@@ -12,6 +13,7 @@ specifiers:
   vue: ^3.0.0
 
 dependencies:
+  axios: 0.21.4
   core-js: 3.17.2
   vue: 3.2.10
 
@@ -2226,6 +2228,14 @@ packages:
     resolution: {integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==}
     dev: true
 
+  /axios/0.21.4:
+    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
+    dependencies:
+      follow-redirects: 1.14.3_debug@4.3.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /babel-eslint/10.1.0_eslint@6.8.0:
     resolution: {integrity: sha512-ifWaTHQ0ce+448CYop8AdrQiBsGrnC+bMgfyKFdi6EsPLTAWG+QfyDeM6OH+FmWnKvEq5NnBMLvlBUPKQZoDSg==}
     engines: {node: '>=6'}
@@ -4271,7 +4281,6 @@ packages:
         optional: true
     dependencies:
       debug: 4.3.2
-    dev: true
 
   /for-in/1.0.2:
     resolution: {integrity: sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=}

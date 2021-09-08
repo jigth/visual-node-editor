@@ -12,15 +12,20 @@
 </template>
 
 <script>
-import EditorArea from "./components/EditorArea.vue"
-import ResultsArea from "./components/ResultsArea.vue"
+import EditorArea from './components/EditorArea.vue';
+import ResultsArea from './components/ResultsArea.vue';
+import { requestBackend } from './utils/urls.js';
+
+// TODO: Delete this when backend is implemented
+requestBackend();
+
 export default {
-  name: 'App',
-  components: {
-      EditorArea,
-      ResultsArea
-  }
-}
+    name: 'App',
+    components: {
+        EditorArea,
+        ResultsArea,
+    },
+};
 </script>
 
 <style>
