@@ -1,0 +1,10 @@
+type AST {
+  tree: String!
+  codes: [Code] @hasInverse(field: ast)
+}
+
+type Code {
+  name: String
+  code: String!
+  ast: AST!
+}
