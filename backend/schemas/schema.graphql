@@ -1,0 +1,5 @@
+type Code {
+  name: String
+  code: String!
+  astTree: String!
+}

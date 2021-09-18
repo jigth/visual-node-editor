@@ -1,9 +1,8 @@
 package main
 
 import (
+	"backend/routes"
 	"net/http"
-
-	"./routes"
 
 	"github.com/go-chi/chi"
 )

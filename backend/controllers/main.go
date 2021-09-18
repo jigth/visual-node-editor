@@ -1,14 +1,15 @@
 package controllers
 
 import (
+	"backend/services"
 	"encoding/json"
 	"fmt"
 	"net/http"
 
-	"../services"
-
 	"github.com/go-chi/chi"
 )
+
+const codeID = "codeID"
 
 // Index is the Controller for the index route
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -16,42 +17,43 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, `{"Message":`+string(res)+`}`)
 }
 
-// GetCode gets the python code from the database
-func GetCode(w http.ResponseWriter, r *http.Request) {
-	codeID := chi.URLParam(r, "codeID")
+// GetCodeByID gets the python code from the database by its UID
+func GetCodeByID(w http.ResponseWriter, r *http.Request) {
+	codeID := chi.URLParam(r, codeID)
 
-	// Response structure
-	type getResponse struct {
-		Status string
-		Code   string `json:"code"`
-	}
-
-	// Response instance
-	newResponse := &getResponse{
-		Status: "Code with id " + codeID + " executed successfully",
-		Code:   "Code with id " + codeID + " goes here",
-	}
-
-	// Serialize response
-	res, _ := json.Marshal(newResponse)
+	resObject := services.GetCodeByID(codeID)
+	res, _ := json.Marshal(resObject)
 
 	fmt.Fprintf(w, string(res))
 }
 
-// ExecuteCode calls a python interpreter and sends the response after executing
-// the code
-func ExecuteCode(w http.ResponseWriter, r *http.Request) {
-	codeID := chi.URLParam(r, "CodeID")
-	code := chi.URLParam(r, "Code")
-	fmt.Println(code)
-	fmt.Fprintf(w, string(`{"status": "Code with id %v executed successfully", "result": "14"}`), codeID)
+// GetAllCode gets all python code nodes (entities) from the database
+func GetAllCode(w http.ResponseWriter, r *http.Request) {
+	resObject := services.GetAllCode()
+	res, _ := json.Marshal(resObject)
+	fmt.Fprintf(w, string(res))
 }
 
 // ExecuteCode calls a python interpreter and sends the response after executing
-// the code
+// the code. The code is retrieved from the database
+func ExecuteCode(w http.ResponseWriter, r *http.Request) {
+	codeID := chi.URLParam(r, codeID)
+
+	// Get code from database
+	code := services.GetCodeByID(codeID).Code
+
+	// Execute it and return response
+	res := services.ExecutePythonCode(string(code))
+	fmt.Fprintf(w, res)
+}
+
+// ExecuteCodeDirectly executes python code directly passed to the server
+// NOTE: This function is for testing purposes only, not for production use
 func ExecuteCodeDirectly(w http.ResponseWriter, r *http.Request) {
+	// Get code from request
 	code := services.GetCodeFromRequest(r).Code
-	fmt.Println(code)
+
+	// Execute it and return response
 	result := services.ExecutePythonCode(code)
 	fmt.Fprintf(w, result)
 }
