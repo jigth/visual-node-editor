@@ -48,7 +48,7 @@ func ExecuteCode(w http.ResponseWriter, r *http.Request) {
 }
 
 // ExecuteCodeDirectly executes python code directly passed to the server
-// NOTE: This function is for testing purposes only, not for production use
+// NOTE/WARNING: This function is for testing purposes only, not for production usage
 func ExecuteCodeDirectly(w http.ResponseWriter, r *http.Request) {
 	// Get code from request
 	code := services.GetCodeFromRequest(r).Code
@@ -58,7 +58,7 @@ func ExecuteCodeDirectly(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, result)
 }
 
-// SaveCode saves the python code into the database
+// SaveCode saves (or updates) the python code into the database
 func SaveCode(w http.ResponseWriter, r *http.Request) {
 	code := services.GetCodeFromRequest(r)
 	res := services.SaveCodeInDatabase(code)

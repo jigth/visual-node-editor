@@ -2,22 +2,21 @@ package services
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	t "backend/mytypes"
-	r "backend/repositories"
+	repo "backend/repositories"
 )
 
 // GetCodeByID returns a code entity by its ID (must be a valid Dgraph UID)
 func GetCodeByID(uid string) t.Code {
-	code := r.GetCodeByID(uid)
+	code := repo.GetCodeByID(uid)
 	return code
 }
 
 // GetAllCode returns all code entities as an array of t.Code
 func GetAllCode() []t.Code {
-	codes := r.GetAllCode()
+	codes := repo.GetAllCode()
 	return codes
 }
 
@@ -34,19 +33,9 @@ func GetCodeFromRequest(r *http.Request) t.Code {
 	return code
 }
 
-// SaveCodeInDatabase saves the code as a node in the database
-func SaveCodeInDatabase(savedCode t.Code) string {
-	code := savedCode.Code
-	name := savedCode.Name
-	id := savedCode.CodeID
-
-	fmt.Println()
-	fmt.Println("Saving...")
-	fmt.Println("code: ", code)
-	fmt.Println("name: ", name)
-	fmt.Println("id: ", id)
-	fmt.Println("Saved to the database succesfully")
-	fmt.Println()
+// SaveCodeInDatabase saves (or updates) the code as a node in the database
+func SaveCodeInDatabase(newCode t.Code) string {
+	savedCode := repo.SaveCode(newCode)
 
 	res, _ := json.Marshal(savedCode)
 	return string(res)

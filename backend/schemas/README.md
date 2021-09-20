@@ -45,16 +45,12 @@ The first two are recommended because they're easier and have great APIs. Althou
       {
          "Code.name":"hello-world.py",
          "Code.code":"print('hello world')",
-         "ast":{
-            "AST.tree":"A JSON serialized string AST representation"
-         }
+         "Code.astTree": "A JSON serialized string AST representation"
       },
       {
          "Code.name":"hello-people.py",
          "Code.code":"print('hello people')",
-         "ast":{
-            "AST.tree":"A JSON serialized string AST representation 2.0"
-         }
+         "Code.astTree": "A JSON serialized string AST representation 2.0"
       }
    ]
 }
@@ -70,9 +66,7 @@ The first two are recommended because they're easier and have great APIs. Althou
          uid
          Code.name
          Code.code
-         ast {
-             AST.tree
-         }
+         Code.astTree
      }
 }
 ```
@@ -87,17 +81,13 @@ The first two are recommended because they're easier and have great APIs. Althou
         "uid": "0x2",
         "Code.name": "hello-world.py",
         "Code.code": "print('hello world')",
-        "ast": {
-          "AST.tree": "A JSON serialized string AST representation"
-        }
+        "Code.astTree": "A JSON serialized string AST representation"
       },
       {
         "uid": "0x4",
         "Code.name": "hello-people.py",
         "Code.code": "print('hello people')",
-        "ast": {
-          "AST.tree": "A JSON serialized string AST representation 2.0"
-        }
+        "Code.astTree": "A JSON serialized string AST representation 2.0"
       }
     ]
   },

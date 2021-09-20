@@ -5,7 +5,7 @@ package mytypes
 // Code is an entity used to store the data (incluiding the AST) of the code in the DB
 type Code struct {
 	CodeID  string
-	Name    string
-	Code    string
-	AstTree string
+	Name    string `json:"name,omitempty"`
+	Code    string `json:"code,omitempty"`
+	AstTree string `json:"astTree"`
 }

@@ -15,4 +15,5 @@ func AddRoutes(r *chi.Mux) {
 	r.Get("/code/execute/{codeID:[0-9x]+}", c.ExecuteCode)
 	r.Post("/code/execute/directly", c.ExecuteCodeDirectly)
 	r.Post("/code/save", c.SaveCode)
+	r.Post("/code/save/", c.SaveCode)
 }

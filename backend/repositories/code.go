@@ -9,6 +9,7 @@ import (
 	"log"
 
 	"github.com/dgraph-io/dgo/v210"
+	"github.com/dgraph-io/dgo/v210/protos/api"
 )
 
 var client *dgo.Dgraph = db.Connect()
@@ -74,4 +75,36 @@ func GetCodeByID(uid string) t.Code {
 	}
 
 	return codes.Data[0]
+}
+
+// SaveCode saves (or updates) the python code into the database
+func SaveCode(code t.Code) string {
+	txn := client.NewTxn()
+	ctx := context.Background()
+	defer txn.Discard(ctx)
+
+	mu := &api.Mutation{
+		CommitNow: true,
+	}
+
+	template := `
+		{
+			 "uid": "%s",
+			 "Code.name": "%s",
+			 "Code.code": "%s",
+			 "Code.astTree": "%s"
+		}
+	`
+
+	toSave := fmt.Sprintf(template, code.CodeID, code.Name, code.Code, code.AstTree)
+	mu.SetJson = []byte(toSave)
+	mutated, err := txn.Mutate(ctx, mu)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	txn.Commit(ctx)
+
+	response := mutated.GetJson()
+	return string(response)
 }
